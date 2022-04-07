@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance Tracker</title>
+    <script src="main.js"></script>
+  </head>
+  
+<body>
+    <div id="cmd0">
+        <h2>ElliptiGO Maintenance Tracker</h2>
+        <button onclick="generateRequest()">Add Custom Maintenance Alarm</button>
+    </div>
+
+    <div id="cmd1">
+        <button onclick="showAlarm()">Show Alarms</button>
+    </div>
+
+    <div id="cmd2">
+        <button onclick="updateMiles()">Update Miles</button>
+    </div>
+    <table id="table" border="1">
+        <tr>
+            <th> Maintenance</th>
+            <th> Required miles before maintenance check </th>
+            <th> Miles ridden </th>
+            <th> </th>
+        </tr>
+    </table>
+
+</body>
+</html>
