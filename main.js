@@ -1,5 +1,17 @@
 const bikeArray = [];
 let tempArray = []
+
+
+/**
+
+async function callBackend1() {
+    loginID = document.getElementById('loginID').value;
+    let myResponse = await fetch("capstone_php.php?playerInfo=" + loginID);
+    let result = await myResponse.json();
+    document.getElementById('output0').innerHTML = JSON.stringify(result);
+}
+*/
+
 function generateRequest() {
     let milesToGo = 0;
     let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete Row</button></html>"
