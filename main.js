@@ -12,6 +12,26 @@ async function callBackend1() {
 }
 */
 
+function addAlarm() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+
+/** The following code is taken from W3 Schools. It hides and shows the contents of the dropdown menu. */
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+/** End of the code from W3 Schools. */
+
 function generateRequest() {
     let milesToGo = 0;
     let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete Row</button></html>"
