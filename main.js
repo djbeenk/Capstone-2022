@@ -1,5 +1,8 @@
 const bikeArray = [];
 let tempArray = []
+let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete</button></html>"
+let milesToGo = 0;
+
 
 
 /**
@@ -33,8 +36,6 @@ window.onclick = function (event) {
 /** End of the code from W3 Schools. */
 
 function generateRequest() {
-    let milesToGo = 0;
-    let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete Row</button></html>"
     let user_Maintenance = prompt("Please enter custom maintenance: ",);
     let user_Miles = prompt("Please enter recommended miles before maintenance check: ",);
     if (user_Maintenance == null || user_Maintenance == "" || user_Miles == null || user_Miles == "") {
@@ -46,10 +47,239 @@ function generateRequest() {
         tempArray.push(deleteRowButton);
         bikeArray.push(tempArray);
         tempArray = [];
+
+
+        var numRows = table.rows.length;
+        for (var h = numRows - 1; h > 0; h--) {
+            table.deleteRow(h);
+        }
+        for (var i = 0; i < bikeArray.length; i++) {
+            var addRow = table.insertRow(table.length);
+            for (var j = 0; j < bikeArray[i].length; j++) {
+                var cell = addRow.insertCell(j);
+                cell.innerHTML = bikeArray[i][j];
+            }
+        }
     }
 }
 
-function showAlarm() {
+function generateRequest_1() {
+    let maintenance = "Lube Chain";
+    let miles = 300;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_2() {
+    let maintenance = "Professional Tune-Up";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_3() {
+    let maintenance = "Replace Brake Pads";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_4() {
+    let maintenance = "Replace Shifter";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_5() {
+    let maintenance = "Replace Brake Cable";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_6() {
+    let maintenance = "Replace Cable Housing";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_7() {
+    let maintenance = "Replace Tires";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_8() {
+    let maintenance = "Replace Chainring & Cassette";
+    let miles = 7200;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_9() {
+    let maintenance = "Replace Chain";
+    let miles = 3600;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}
+
+function generateRequest_10() {
+    let maintenance = "Replace Rear Derailleur Jockey Wheels";
+    let miles = 7200;
+    tempArray.push(maintenance);
+    tempArray.push(miles);
+    tempArray.push(milesToGo);
+    tempArray.push(deleteRowButton);
+    bikeArray.push(tempArray);
+    tempArray = [];
+
     var numRows = table.rows.length;
     for (var h = numRows - 1; h > 0; h--) {
         table.deleteRow(h);
@@ -67,6 +297,18 @@ function updateMiles() {
     let milesRidden = prompt("Please enter how many miles you've ridden: ",);
     for (var i = 0; i < bikeArray.length; i++) {
         bikeArray[i][2] += Number(milesRidden);
+    }
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
     }
 }
 

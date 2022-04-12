@@ -100,20 +100,21 @@
 
         <div id="myDropdown" class="dropdown-content">
             <ul>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_1()">Lube Chain</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_2()">Professional Tune-Up</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_3()">Replace Brake Pads</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_4()">Replace Shifter</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_5()">Replace Brake Cable</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_6()">Replace Cable Housing</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_7()">Replace Tires</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_8()">Replace Chainring & Cassette</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_9()">Replace Chain</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_10()">Replace Rear Derailleur Jockey Wheels</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Lube Chain</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Professional Tune-Up</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Brake Pads</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Shifter</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Brake Cable</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Cable Housing</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Tires</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Chainring & Cassette</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Chain</p></li>
+                <li><p id="maintenanceAlarm" onclick="generateRequest()">Replace Rear Derailleur Jockey Wheels</p></li>
             </ul>
         </div>
 
         <button onclick="generateRequest()">Add Custom Alarm</button>
+        <button onclick="showAlarm()">Show Alarms</button>
         <button onclick="updateMiles()">Update Miles</button>
     </div>
 
