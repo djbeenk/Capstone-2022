@@ -101,7 +101,7 @@ elseif(isset($_GET["get_speed"])) {
     error_log("playerInfo sending value: " . $result);
     echo $result;
 }
-//joey did this function
+//danny did this function
 elseif(isset($_GET["get_avgDis"])) {
     $loginID = $_GET["get_avgDis"];
 
@@ -128,7 +128,7 @@ elseif(isset($_GET["get_avgDis"])) {
     echo $result;
 }
 
-//danny did this function
+//joey did this function
 elseif(isset($_GET["login"])) {
     $loginID_1 = $_GET["login"];
     $bikeArray = $_GET["array"];
