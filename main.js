@@ -1,3 +1,4 @@
+//joey did this function
 let bikeArray = [];
 let tempArray = []
 let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete</button></html>";
@@ -13,7 +14,7 @@ function myFunction(id) {
         x.className = x.className.replace(" w3-show", "");
     }
 }
-
+//alicia did this functioono
 function myFunction_setting() {
     var checkBox = document.getElementById("myCheck");
     var text = document.getElementById("text");
@@ -24,7 +25,7 @@ function myFunction_setting() {
     }
 }
 
-
+//danny did this function
 //This function gets the first name from the big database
 async function getID() {
     loginID = document.getElementById('loginID').value;
@@ -35,7 +36,7 @@ async function getID() {
     window.alert("Hello, " + result1);
     document.getElementById("name").innerHTML = result1;
 }
-
+//joey did this function
 //This function is tied to the sync account and adds the stravaID and the sum of distance to our own capstone database file
 async function connectID() {
     connect = document.getElementById('loginID').value;
@@ -43,7 +44,7 @@ async function connectID() {
     let result2 = await myResponse2.json();
     window.alert(result2);
 }
-
+//danny did this function
 //This function retrieves the current distance travelled from the big database.
 async function get_initialDistance() {
     login_id = document.getElementById('loginID').value;
@@ -54,7 +55,7 @@ async function get_initialDistance() {
     initialDistance = result;
     return initialDistance;
 }
-
+//joey did this function
 async function get_newDistance() {
     login_id = document.getElementById('loginID').value;
     let response = await fetch("capstone_php.php?get_distance=" + login_id);
@@ -69,7 +70,7 @@ async function get_newDistance() {
     sessionStorage.setItem(login_id, newDistance);
     return newDistance;
 }
-
+//danny did this function
 async function get_avgSpeed() {
     login_id1 = document.getElementById('loginID').value;
     let response = await fetch("capstone_php.php?get_speed=" + login_id1);
@@ -80,7 +81,7 @@ async function get_avgSpeed() {
 
     document.getElementById("speed").innerHTML = result;
 }
-
+//danny did this function
 async function get_avgDistance() {
     login_id2 = document.getElementById('loginID').value;
     let response = await fetch("capstone_php.php?get_avgDis=" + login_id2);
@@ -89,7 +90,7 @@ async function get_avgDistance() {
     result = Math.trunc(result * 0.00062137);
     document.getElementById("avgDistance").innerHTML = result;
 }
-
+//joey did this function
 //This function saves the bikeArray that contains the maintenance, required miles, miles to go - it saves it into the capstone database file
 async function saveAlarm() {
     for (let i = 0; i < bikeArray.length; i++) {
@@ -101,7 +102,7 @@ async function saveAlarm() {
     let result3 = await myResponse3.json();
     window.alert(result3);
 }
-
+//joey did this next functions from here down
 //This function retrieves the bikearray from the capstone database file and then populates the table
 async function loadAlarm() {
     loginID_2 = document.getElementById('loginID').value;
@@ -158,6 +159,7 @@ function checkMiles_Alarm() {
         }
     }
 }
+
 //This function adds all the predetermined maintenances to the dropdown
 function addAlarm() {
     document.getElementById("myDropdown").classList.toggle("show");
