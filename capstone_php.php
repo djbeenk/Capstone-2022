@@ -128,7 +128,7 @@ elseif(isset($_GET["get_avgDis"])) {
     echo $result;
 }
 
-//joey did this function
+//danny did this function
 elseif(isset($_GET["login"])) {
     $loginID_1 = $_GET["login"];
     $bikeArray = $_GET["array"];
