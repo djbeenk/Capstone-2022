@@ -1,4 +1,5 @@
 <?php 
+//danny did this function
 if (isset($_GET["playerInfo"])) {
     $loginID = $_GET["playerInfo"];
     $db = new SQLite3('db/gercdb2022Mar31.db');
@@ -24,7 +25,7 @@ if (isset($_GET["playerInfo"])) {
     error_log("playerInfo sending value: " . $result);
     echo $result;
 } 
-
+//joey did this function
 //This function is tied to the Sync Button. Syncing account gets the Strava ID number and the initial distance during account creation. 
 //This initial distance will be used to compare the number of meters the user has ridden after each login. This value will be converted to miles
 //and then will see if the new distance number is bigger than the initial. The difference will be added to milesToGo in bikeArray.
@@ -46,7 +47,7 @@ elseif(isset($_GET["createInfo"])) {
     echo $jsonToSend;
 }
 
-
+//danny did this function
 //This retrieves current sum of distance from big database
 elseif(isset($_GET["get_distance"])) {
     $loginID = $_GET["get_distance"];
@@ -73,7 +74,7 @@ elseif(isset($_GET["get_distance"])) {
     error_log("playerInfo sending value: " . $result);
     echo $result;
 }
-
+//danny did this function
 //This retrieves current avg speed from big database
 elseif(isset($_GET["get_speed"])) {
     $loginID = $_GET["get_speed"];
@@ -100,7 +101,7 @@ elseif(isset($_GET["get_speed"])) {
     error_log("playerInfo sending value: " . $result);
     echo $result;
 }
-
+//joey did this function
 elseif(isset($_GET["get_avgDis"])) {
     $loginID = $_GET["get_avgDis"];
 
@@ -127,7 +128,7 @@ elseif(isset($_GET["get_avgDis"])) {
     echo $result;
 }
 
-
+//joey did this function
 elseif(isset($_GET["login"])) {
     $loginID_1 = $_GET["login"];
     $bikeArray = $_GET["array"];
@@ -152,7 +153,7 @@ elseif(isset($_GET["login"])) {
     $db->close();
     echo $jsonToSend;
 }
-
+//joey did this function
 elseif (isset($_GET["login2"])) {
     $loginID2 = $_GET["login2"];
     $db = new SQLite3('db/capstone.db');
