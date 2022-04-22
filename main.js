@@ -33,16 +33,28 @@ async function getID() {
     let result = await myResponse.json();
     let result1 = JSON.stringify(result);
     result1 = (result1.replace(/\"/g, ""));
-    window.alert("Hello, " + result1);
-    document.getElementById("name").innerHTML = result1;
+    if (result1 == "Strava Activity ID not found.") {
+        window.alert("Could not find ID.");
+    }
+    else {
+        document.getElementById("overlay").style.display = "none";
+
+        window.alert("Hello, " + result1);
+        document.getElementById("name").innerHTML = result1;
+    }
 }
 //joey did this function
 //This function is tied to the sync account and adds the stravaID and the sum of distance to our own capstone database file
 async function connectID() {
-    connect = document.getElementById('loginID').value;
-    let myResponse2 = await fetch("capstone_php.php?createInfo=" + connect);
-    let result2 = await myResponse2.json();
-    window.alert(result2);
+    if (confirm("Would you like to sync your account? Sync your account once to begin saving your alarms.")) {
+        connect = document.getElementById('loginID').value;
+        let myResponse2 = await fetch("capstone_php.php?createInfo=" + connect);
+        let result2 = await myResponse2.json();
+        window.alert(result2);
+    }
+    else {
+        window.alert("Sync account cancelled.");
+    }
 }
 //danny did this function
 //This function retrieves the current distance travelled from the big database.
@@ -93,14 +105,19 @@ async function get_avgDistance() {
 //joey did this function
 //This function saves the bikeArray that contains the maintenance, required miles, miles to go - it saves it into the capstone database file
 async function saveAlarm() {
-    for (let i = 0; i < bikeArray.length; i++) {
-        bikeArray[i][3] = bikeArray[i][3].replace(/\'/g, "''");
-    }
+    if (confirm("Would you like to save? You can only save once per session.")) {
+        for (let i = 0; i < bikeArray.length; i++) {
+            bikeArray[i][3] = bikeArray[i][3].replace(/\'/g, "''");
+        }
 
-    loginID_1 = document.getElementById('loginID').value;
-    let myResponse3 = await fetch("capstone_php.php?login=" + loginID_1 + "&array=" + bikeArray);
-    let result3 = await myResponse3.json();
-    window.alert(result3);
+        loginID_1 = document.getElementById('loginID').value;
+        let myResponse3 = await fetch("capstone_php.php?login=" + loginID_1 + "&array=" + bikeArray);
+        let result3 = await myResponse3.json();
+        window.alert(result3);
+    }
+    else {
+        window.alert("Save alarms cancelled.");
+    }
 }
 //joey did this next functions from here down
 //This function retrieves the bikearray from the capstone database file and then populates the table
@@ -489,7 +506,21 @@ function generateRequest_10() {
                 cell.innerHTML = bikeArray[i][j];
             }
         }
+        return bikeArray;
     });
+}
+
+function devMode() {
+    if (update_button.style.display === "inline-block") {
+        update_button.style.display = "none";
+    }
+    else {
+        update_button.style.display = "inline-block";
+    }
+}
+
+function helpFunction() {
+    window.alert("If you are getting the Alarms not found - undefined error, reload the page, add your alarms, press the save alarm button, then reload again.");
 }
 //This function is used to manually update the milestogo to show how the alarms work and for testing purposes.
 function updateMiles() {

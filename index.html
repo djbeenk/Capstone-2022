@@ -116,7 +116,52 @@
 
             .slider.round:before {
                 border-radius: 50%;
-            } 
+            }
+
+        #overlay {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        #loginID {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 30px;
+            color: black;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+
+        #loginButton {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            font-size: 30px;
+            color: black;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+
+        #update_button{
+            display: none;
+        }
+
+        #help_button{
+            background-image: url(help.jpg);
+            width: 40px;
+            height: 25px;
+            background-size: cover;
+        }
     </style>
 <!--alicia ended here-->
     <!--joey started here-->
@@ -148,8 +193,11 @@
 </head>
   
 <body>
-    <div> Login ID: <input type="text" id="loginID" /></div>
-    <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();">Login</button>
+    <div id="overlay">
+        <div> Login ID: <input type="text" id="loginID" /></div>
+        <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();">Login</button>
+    </div>
+
     <button id="syncButton" onclick="connectID()">Sync Account</button>
 
 
@@ -175,10 +223,10 @@
         </div>
 
         <button onclick="generateRequest()">Add Custom Alarm</button>
-        <button onclick="updateMiles()">Update Miles</button>
+        <div id="update_button"><button onclick="updateMiles()">Update Miles</button></div>
         <button onclick="saveAlarm()">Save Alarm</button>
-        <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
 
+        <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
     </div>
 
     <table id="table" border="1">
@@ -189,9 +237,11 @@
             <th> </th>
         </tr>
     </table>
+
+    <button id="help_button" onclick="helpFunction()"></button>
+    
+   
     <!-- joey stopped here -->
-
-
     <!-- danny started here-->
     <div class="w3-light-grey w3-section">
         <button onclick="myFunction('bikerInfo')" class="w3-button w3-block w3-left-align">
@@ -250,6 +300,16 @@
             <h2>Settings</h2>
         </button>
         <div id="settings" class="w3-hide w3-container">
+
+
+            <div id="switch">
+                <p>Enable Dev-Mode to show manual updating of miles button.</p>
+                <label class="switch">
+                    <input type="checkbox" onchange="devMode()" />
+                    <span class="slider"></span>
+                </label><br>
+            </div>
+
 
 
             <div id="switch">
