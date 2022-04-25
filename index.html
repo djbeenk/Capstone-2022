@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+    <link href="reset_G6.css" rel="stylesheet">
+    <link href="group6_css.css" rel="stylesheet">
     <title>Maintenance Tracker</title>
     <script src="main.js"></script>
 
@@ -116,53 +117,19 @@
 
             .slider.round:before {
                 border-radius: 50%;
-            }
-
-        #overlay {
-            position: fixed;
-            display: block;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 2;
-            cursor: pointer;
+            } 
+        span{
+            align-items: center;
+            vertical-align: middle;
         }
-
-        #loginID {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            font-size: 30px;
-            color: black;
-            transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-        }
-
-        #loginButton {
-            position: absolute;
-            top: 70%;
-            left: 50%;
-            font-size: 30px;
-            color: black;
-            transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-        }
-
-        #update_button{
-            display: none;
-        }
-
-        #help_button{
-            background-image: url(help.jpg);
-            width: 40px;
-            height: 25px;
-            background-size: cover;
+        .scroller{
+            text-align: center;
+            font: times, serif;
+            color:black;
+            background-color: cadetblue;
         }
     </style>
+
 <!--alicia ended here-->
     <!--joey started here-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -173,8 +140,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2E7D32; ">
-
-
+        <a name="top"></a>
         <a class="navbar-brand" href="#">
             <img src="logo.png" alt="Logo" style="width:200px;">
         </a>
@@ -193,11 +159,8 @@
 </head>
   
 <body>
-    <div id="overlay">
-        <div> Login ID: <input type="text" id="loginID" /></div>
-        <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();">Login</button>
-    </div>
-
+    <div> Login ID: <input type="text" id="loginID" /></div>
+    <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();">Login</button>
     <button id="syncButton" onclick="connectID()">Sync Account</button>
 
 
@@ -223,10 +186,10 @@
         </div>
 
         <button onclick="generateRequest()">Add Custom Alarm</button>
-        <div id="update_button"><button onclick="updateMiles()">Update Miles</button></div>
+        <button onclick="updateMiles()">Update Miles</button>
         <button onclick="saveAlarm()">Save Alarm</button>
-
         <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
+
     </div>
 
     <table id="table" border="1">
@@ -237,18 +200,15 @@
             <th> </th>
         </tr>
     </table>
-
-    <button id="help_button" onclick="helpFunction()"></button>
-    
-   
     <!-- joey stopped here -->
+
+
     <!-- danny started here-->
     <div class="w3-light-grey w3-section">
-        <button onclick="myFunction('bikerInfo')" class="w3-button w3-block w3-left-align">
+            <button onclick="myFunction('bikerInfo')" class="w3-button w3-block w3-left-align">
             <h2>Biker Information</h2>
         </button>
         <div id="bikerInfo" class="w3-hide w3-container">
-
             <table id="Biker_Info" border="1" style="width:50%">
                 <tr>
                     <th></th>
@@ -268,7 +228,6 @@
             </table>
         </div>
     </div>
-
     <div class="w3-light-grey w3-section">
         <button onclick="myFunction('videos')" class="w3-button w3-block w3-left-align">
             <h2>Videos & Guides</h2>
@@ -277,6 +236,10 @@
 
             <p>Below are videos and links to helpful tutorial videos depending on what bike issue you are encountering.</p>
 
+            <div id="links">
+                <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank" img src="elliptigo_maintenance.png" width="400" height="250">
+                    <figcaption>Basic ElliptiGO Bike Maintenance</figcaption>
+                </a>
             <div id="links" class="row">
                 <div class="column">
                     <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank">
@@ -309,6 +272,8 @@
                     <figcaption>How to adjust the chain tension on an ElliptiGO ellitical bike</figcaption>
                 </a>
                 <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
+                    <img src="brakes.png" width="400" height="250">
+                    <figcaption>Adjusting the Breaks</figcaption>
                     <img src="adjusting_breaks.png" width="400" height="250">
                     <figcaption>Adjusting the Brakes</figcaption>
                 </a>
@@ -336,57 +301,72 @@
                     <img src="cross_threading.png" width="400" height="250">
                     <figcaption>Preventing Cross-Threading when Changing Stride Length</figcaption>
                 </a>
+                <a href="https://www.youtube.com/watch?v=_NA-dpzSRfY" target="_blank">
+                    <img src="3C_Hub.png" width="400" height="250">
+                    <figcaption>Adjusting the 3C Hub</figcaption>
                 <a href="https://www.youtube.com/watch?v=FJY9Qxm54LM&feature=emb_title" target="_blank">
                     <img src="stride_length.png" width="400" height="250">
                     <figcaption>Changing the Stride Length</figcaption>
                 </a>
+                </a>
             </div>
         </div>
-    </div>
+            <br>
+            <button id="scroller"><a href="#top">Jump to top of page</a></button>
+        </div>
+    </div>                 
+    
     <!-- /*danny ended here*/ -->
     <!--alicia started here-->
+    
     <div class="w3-light-grey w3-section">
         <button onclick="myFunction('settings')" class="w3-button w3-block w3-left-align">
             <h2>Settings</h2>
         </button>
-        <div id="settings" class="w3-hide w3-container">
-
-
-            <div id="switch">
-                <p>Enable Dev-Mode to show manual updating of miles button.</p>
-                <label class="switch">
-                    <input type="checkbox" onchange="devMode()" />
-                    <span class="slider"></span>
-                </label><br>
-            </div>
-
-
-
-            <div id="switch">
-                <p>Enable Notifications</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label><br>
-            </div>
-
-            <div id="switch">
-                <p> Enable Notifications</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label><br>
-            </div>
-
-            <div id="checkbox">
-                <p id="text" style="display:none">Checkboxaroo!</p>
-            </div>
-            <label for="myCheck">Checkbox:</label>
-            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
-
         </div>
-    </div>
+        <div id="settings" class="w3-hide w3-container">
+            <div id="checkbox">
+            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+            <label for="myCheck">Allow automatic video play</label>
+            </div>
+            <div id="checkbox">
+            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+            <label for="myCheck">Turn off all notification</label>
+            </div>
+            <div id="checkbox">
+            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+            <label for="myCheck">Allow only personalized notifications</label>
+            </div>
+            <div id="switch">
+                <label class="switch">
+                    <span class="slider round"></span>
+                </label><span id="toggle"></span><span>
+                Enable notifications when silenced</span><br>
+            </div>
 
+            <div id="switch">
+                <label class="switch">
+                <span class="slider round"></span>
+                </label><span id="toggle"></span><span>Enable pop-up notifications</span><br>
+            </div>
+        <div id="checkbox">
+            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+            <label for="myCheck">Allow Text Message Reminders</label>
+            </div>
+            <div id="checkbox">
+            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+            <label for="myCheck">Allow Email Reminders</label>
+        </div>
+            <div>
+                <form action="/action_page_binary.asp" method="post">
+                    <label for="fname">Notify me  </label>
+                    <input type="text" id="fname" name="fname" size="3"><span style="white-space: nowrap;">  days in advance.</span><br><br>
+                    <input type="submit" value="Update">
+                </form>         
+            </div>
+    <br>
+    <button id="scroller"><a href="#top">Jump to top of page</a></button>
+    </div>
 </body>
     </html>
 <!-- alicia ended here --> 
