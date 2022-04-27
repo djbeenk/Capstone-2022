@@ -6,6 +6,81 @@ let milesToGo = 0;
 let initialDistance = 0;
 let newDistance = 0;
 
+//If notifications is set to true, then enable notifications. This variable is used in the settings
+let notifications = true;
+
+//Compares miles ridden with required miles before maintenance and outputs what needs maintenance. If the notification api does not work, it will just do a window alert instead
+function checkMiles_Alarm() {
+    for (var i = 0; i < bikeArray.length; i++) {
+        if (bikeArray[i][2] >= bikeArray[i][1]) {
+           // window.alert(bikeArray[i][0] + " needs maintenance!");
+
+            if (notifications === true) {
+                let permission = Notification.permission;
+
+                if (permission === 'granted') {
+                    new Notification(bikeArray[i][0] + " needs maintenance!");
+                }
+                else {
+                    window.alert(bikeArray[i][0] + " needs maintenance!");
+                }
+            }
+        }
+    }
+}
+
+
+//mutes notification toggle for settings. When enabled, it sets notifications to false and the user will no longer receive notifications 
+function muteNotifications() {
+    if (notifications === true) {
+        notifications = false;
+    }
+    else if (notifications === false) {
+        notifications = true;
+    }
+}
+
+
+//This function is for the switch toggle in settings. When enabled, it shows the update miles button
+function devMode() {
+    if (update_button.style.display === "inline-block") {
+        update_button.style.display = "none";
+    }
+    else {
+        update_button.style.display = "inline-block";
+    }
+}
+
+// The searchFunction() syntax is credited to W3 Schools. This function is used for searching for a video
+function searchFunction() {
+    var input;
+    var search;
+    var ul;
+    var li;
+    var a;
+    var i;
+    var searchText;
+
+    input = document.getElementById("myInput");
+    search = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    list = ul.getElementsByTagName("li");
+
+    for (i = 0; i < list.length; i++)
+    {
+        a = list[i].getElementsByTagName("a")[0];
+        searchText = a.textContent || a.innerText;
+
+        if (searchText.toUpperCase().indexOf(search) > -1) {
+            list[i].style.display = "";
+        }
+
+        else {
+            list[i].style.display = "none";
+        }
+    }
+}
+//The myFunction syntax is credited to W3 Schools
 function myFunction(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {
@@ -34,12 +109,17 @@ async function getID() {
     let result1 = JSON.stringify(result);
     result1 = (result1.replace(/\"/g, ""));
     if (result1 == "Strava Activity ID not found.") {
-        window.alert("Could not find ID.");
+        //window.alert("Could not find ID.");
+        document.getElementById("WelcomeMessage").innerHTML = result1;
+
     }
     else {
         document.getElementById("overlay").style.display = "none";
 
-        window.alert("Hello, " + result1);
+        //window.alert("Hello, " + result1);
+        let welcomeMessage = ("Hello, " + result1 + "!");
+        document.getElementById("WelcomeMessage").innerHTML = welcomeMessage;
+
         document.getElementById("name").innerHTML = result1;
     }
 }
@@ -50,10 +130,16 @@ async function connectID() {
         connect = document.getElementById('loginID').value;
         let myResponse2 = await fetch("capstone_php.php?createInfo=" + connect);
         let result2 = await myResponse2.json();
-        window.alert(result2);
+        //window.alert(result2);
+        syncSuccess = "Account synced.";
+        document.getElementById("SyncMessage").innerHTML = syncSuccess;
+
     }
     else {
-        window.alert("Sync account cancelled.");
+        //window.alert("Sync account cancelled.");
+        let syncFail = "Sync account cancelled.";
+        document.getElementById("SyncMessage").innerHTML = syncFail;
+
     }
 }
 //danny did this function
@@ -63,7 +149,7 @@ async function get_initialDistance() {
     let response = await fetch("capstone_php.php?get_distance=" + login_id);
     let result = await response.json();
     result = Math.trunc(result * 0.00062137);
-    window.alert(result);
+    //window.alert(result);
     initialDistance = result;
     return initialDistance;
 }
@@ -168,14 +254,6 @@ async function loadAlarm() {
     return (bikeArray);
 }
 
-//Compares miles ridden with required miles before maintenance and outputs what needs maintenance. 
-function checkMiles_Alarm() {
-    for (var i = 0; i < bikeArray.length; i++) {
-        if (bikeArray[i][2] >= bikeArray[i][1]) {
-            window.alert(bikeArray[i][0] + " needs maintenance!");
-        }
-    }
-}
 
 //This function adds all the predetermined maintenances to the dropdown
 function addAlarm() {
@@ -510,17 +588,10 @@ function generateRequest_10() {
     });
 }
 
-function devMode() {
-    if (update_button.style.display === "inline-block") {
-        update_button.style.display = "none";
-    }
-    else {
-        update_button.style.display = "inline-block";
-    }
-}
-
 function helpFunction() {
-    window.alert("If you are getting the Alarms not found - undefined error, reload the page, add your alarms, press the save alarm button, then reload again.");
+    document.getElementById("helpMessage").innerHTML = "If you are getting the Alarms not found - undefined error or your alarms are not saving, reload the page, add your alarms, press the save alarm button, then reload again.";
+
+   // window.alert("If you are getting the Alarms not found - undefined error or your alarms are not saving, reload the page, add your alarms, press the save alarm button, then reload again.");
 }
 //This function is used to manually update the milestogo to show how the alarms work and for testing purposes.
 function updateMiles() {

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- alicia started here --> 
+    <!-- alicia started here -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
 
     <title>Maintenance Tracker</title>
     <script src="main.js"></script>
@@ -40,9 +43,11 @@
             display: block;
         }
 
+        /* 
         p:hover {
             background-color: palegreen;
         }
+         */
 
         ul {
             margin: 0;
@@ -96,7 +101,7 @@
             }
 
         input:checked + .slider {
-            background-color: #2196F3;
+            background-color: #2E7D32;
         }
 
         input:focus + .slider {
@@ -152,18 +157,29 @@
             -ms-transform: translate(-50%,-50%);
         }
 
-        #update_button{
+        #update_button {
             display: none;
         }
 
-        #help_button{
+        #help_button {
             background-image: url(help.jpg);
             width: 40px;
             height: 25px;
             background-size: cover;
         }
+
+        #myInput {
+            background-image: url('/css/searchicon.png');
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
     </style>
-<!--alicia ended here-->
+    <!--alicia ended here-->
     <!--joey started here-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -195,11 +211,80 @@
 <body>
     <div id="overlay">
         <div> Login ID: <input type="text" id="loginID" /></div>
-        <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();">Login</button>
+        <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();" data-toggle="modal" data-target="#myModal">Login</button>
     </div>
 
-    <button id="syncButton" onclick="connectID()">Sync Account</button>
+    <button id="syncButton" onclick="connectID()" data-toggle="modal" data-target="#modalSync">Sync Account</button>
 
+
+
+    <!-- Welcome Message for Login -->
+    <div class="container">
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="WelcomeMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sync Account Messages -->
+
+    <div class="container">
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="modalSync" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="SyncMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Help box message -->
+
+    <div class="container">
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="modalHelp" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="helpMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
@@ -238,9 +323,10 @@
         </tr>
     </table>
 
-    <button id="help_button" onclick="helpFunction()"></button>
-    
    
+    <button id="help_button" onclick="helpFunction();" data-toggle="modal" data-target="#modalHelp"></button>
+ 
+
     <!-- joey stopped here -->
     <!-- danny started here-->
     <div class="w3-light-grey w3-section">
@@ -276,70 +362,101 @@
         <div id="videos" class="w3-hide w3-container">
 
             <p>Below are videos and links to helpful tutorial videos depending on what bike issue you are encountering.</p>
+            <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for a video" title="Search for a video">
+            <div id="links">
+                <ul id="myUL">
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank">
+                            <img src="elliptigo_maintenance.png" width="400" height="250">
+                            <figcaption>Basic ElliptiGO Bike Maintenance</figcaption>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
+                            <img src="brakes.png" width="400" height="250">
+                            <figcaption>Adjusting the Breaks</figcaption>
+                        </a>
+                    </li>
 
-            <div id="links" class="row">
-                <div class="column">
-                    <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank">
-                        <img src="elliptigo_maintenance.png" width="400" height="250">
-                        <figcaption>Basic ElliptiGO Bike Maintenance</figcaption>
-                    </a>
-                </div>
-                <div class="column">
-                    <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
-                        <img src="brakes.png" width="400" height="250">
-                        <figcaption>Adjusting the Breaks</figcaption>
-                    </a>
-                </div>
-                <div class="column">
-                    <a href="https://www.youtube.com/watch?v=_NA-dpzSRfY" target="_blank">
-                        <img src="3C_Hub.png" width="400" height="250">
-                        <figcaption>Adjusting the 3C Hub</figcaption>
-                    </a>
-                </div>
-                <a href="https://www.youtube.com/watch?v=ICIW5PhGAgI" target="_blank">
-                    <img src="remove_rear.png" width="400" height="250">
-                    <figcaption>Removing the Rear Wheel on the 3C</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=JjlukHhAwTo" target="_blank">
-                    <img src="install_rear.png" width="400" height="250">
-                    <figcaption>Installing the Rear Wheel on the 3C</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=orKUweCHhyY&feature=emb_title" target="_blank">
-                    <img src="adjust_chain.png" width="400" height="250">
-                    <figcaption>How to adjust the chain tension on an ElliptiGO ellitical bike</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
-                    <img src="adjusting_breaks.png" width="400" height="250">
-                    <figcaption>Adjusting the Brakes</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=Sx4xubZRKTI" target="_blank">
-                    <img src="handle_bar.png" width="400" height="250">
-                    <figcaption>Adjusting Steering Height on the 3C</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=fozLT9AoXmY" target="_blank">
-                    <img src="front_wheel.png" width="400" height="250">
-                    <figcaption>Installing Front Wheel</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=owS8GIbeurI&feature=emb_title" target="_blank">
-                    <img src="removing_front_wheel.png" width="400" height="250">
-                    <figcaption>Removing Front Wheel</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=F-naPT6vYgo&feature=emb_title" target="_blank">
-                    <img src="tire_change.png" width="400" height="250">
-                    <figcaption>Changing a Tire</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=LKA1LoWvWb4" target="_blank">
-                    <img src="inflate.png" width="400" height="250">
-                    <figcaption>Inflate a Tire</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=8-KND18FQWI" target="_blank">
-                    <img src="cross_threading.png" width="400" height="250">
-                    <figcaption>Preventing Cross-Threading when Changing Stride Length</figcaption>
-                </a>
-                <a href="https://www.youtube.com/watch?v=FJY9Qxm54LM&feature=emb_title" target="_blank">
-                    <img src="stride_length.png" width="400" height="250">
-                    <figcaption>Changing the Stride Length</figcaption>
-                </a>
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=_NA-dpzSRfY" target="_blank">
+                            <img src="3C_Hub.png" width="400" height="250">
+                            <figcaption>Adjusting the 3C Hub</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=ICIW5PhGAgI" target="_blank">
+                            <img src="remove_rear.png" width="400" height="250">
+                            <figcaption>Removing the Rear Wheel on the 3C</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=JjlukHhAwTo" target="_blank">
+                            <img src="install_rear.png" width="400" height="250">
+                            <figcaption>Installing the Rear Wheel on the 3C</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=orKUweCHhyY&feature=emb_title" target="_blank">
+                            <img src="adjust_chain.png" width="400" height="250">
+                            <figcaption>How to adjust the chain tension on an ElliptiGO ellitical bike</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=Sx4xubZRKTI" target="_blank">
+                            <img src="handle_bar.png" width="400" height="250">
+                            <figcaption>Adjusting Steering Height on the 3C</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=fozLT9AoXmY" target="_blank">
+                            <img src="front_wheel.png" width="400" height="250">
+                            <figcaption>Installing Front Wheel</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=owS8GIbeurI&feature=emb_title" target="_blank">
+                            <img src="removing_front_wheel.png" width="400" height="250">
+                            <figcaption>Removing Front Wheel</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=F-naPT6vYgo&feature=emb_title" target="_blank">
+                            <img src="tire_change.png" width="400" height="250">
+                            <figcaption>Changing a Tire</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=LKA1LoWvWb4" target="_blank">
+                            <img src="inflate.png" width="400" height="250">
+                            <figcaption>Inflate a Tire</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=8-KND18FQWI" target="_blank">
+                            <img src="cross_threading.png" width="400" height="250">
+                            <figcaption>Preventing Cross-Threading when Changing Stride Length</figcaption>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=FJY9Qxm54LM&feature=emb_title" target="_blank">
+                            <img src="stride_length.png" width="400" height="250">
+                            <figcaption>Changing the Stride Length</figcaption>
+                        </a>
+                    </li>
+
+                </ul>
+
             </div>
         </div>
     </div>
@@ -361,28 +478,40 @@
             </div>
 
 
-
             <div id="switch">
-                <p>Enable Notifications</p>
+                <p>Mute Notifications</p>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" onchange="muteNotifications()">
                     <span class="slider"></span>
                 </label><br>
             </div>
 
-            <div id="switch">
-                <p> Enable Notifications</p>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label><br>
+
+            <div id="checkbox">
+                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+                <label for="myCheck">Allow automatic video play</label>
             </div>
 
             <div id="checkbox">
-                <p id="text" style="display:none">Checkboxaroo!</p>
+                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+                <label for="myCheck">Allow Text Message Reminders</label>
             </div>
-            <label for="myCheck">Checkbox:</label>
-            <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+
+            <div id="checkbox">
+                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
+                <label for="myCheck">Allow Email Reminders</label>
+            </div>
+
+            <div>
+                <form action="/action_page_binary.asp" method="post">
+                    <label for="fname">Notify me  </label>
+                    <input type="text" id="fname" name="fname" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+
+            <br />
+            <button id="scroller"><a href="#top">Jump to top of page</a></button>
 
         </div>
     </div>
