@@ -35,7 +35,7 @@ elseif(isset($_GET["createInfo"])) {
     $db = new SQLite3('db/capstone.db');
 
 
-    $query = ("ATTACH DATABASE 'C:/users/joeyb/desktop/capstone - testing/db/gercdb2022Mar31.db' as bigDatabase");
+    $query = ("ATTACH DATABASE 'C:/users/joeyb/desktop/capstone/db/gercdb2022Mar31.db' as bigDatabase");
     $db->exec($query);
     
     $query_1 = ("INSERT INTO riders(activityID, miles) SELECT riderStravaId, SUM(distance) FROM summaryActivity where riderStravaId = '$createID'");

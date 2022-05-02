@@ -4,15 +4,41 @@
     <!-- alicia started here -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-
-
     <title>Maintenance Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+
     <script src="main.js"></script>
 
+
+
+
+
     <style>
+        * {
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 16px;
+            font-family: "Lucida Grande", Geneva, Verdana, Arial, Helvetica, sans-serif;
+            color: black;
+        }
+
+        .table {
+            max-width: 750px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+
+
         .dropdown {
             position: relative;
             display: inline-block;
@@ -22,6 +48,7 @@
             display: none;
             position: absolute;
             background-color: #f1f1f1;
+            max-width: 750;
             min-width: 160px;
             overflow: auto;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -43,14 +70,14 @@
             display: block;
         }
 
-        
+
         p:hover {
             background-color: palegreen;
         }
-         
+
 
         ul {
-            margin: 0;
+            margin: auto;
             padding: 0;
             list-style: none;
             text-align: center;
@@ -75,53 +102,6 @@
                 height: 0;
             }
 
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-        input:checked + .slider {
-            background-color: #2E7D32;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-            .slider.round:before {
-                border-radius: 50%;
-            }
 
         #overlay {
             position: fixed;
@@ -161,6 +141,10 @@
             display: none;
         }
 
+        #updateButtonModal {
+            display: none;
+        }
+
         #help_button {
             background-image: url(help.jpg);
             width: 40px;
@@ -178,6 +162,45 @@
             border: 1px solid #ddd;
             margin-bottom: 12px;
         }
+
+
+
+
+        #links {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .img-source {
+            margin-top: 12px;
+        }
+
+        /* Clear floats after the columns */
+        #myUL:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .dropdown-content {
+            vertical-align: middle;
+        }
+
+        #bikerInfo {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #scroller {
+            color: black !Important;
+        }
+
+        .container {
+            align-content: center;
+            vertical-align: middle;
+            align-items: center;
+        }
     </style>
     <!--alicia ended here-->
     <!--joey started here-->
@@ -188,8 +211,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2E7D32; ">
-
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #84b444">
 
         <a class="navbar-brand" href="#">
             <img src="logo.png" alt="Logo" style="width:200px;">
@@ -209,312 +231,452 @@
 </head>
   
 <body>
-    <div id="overlay">
-        <div> Login ID: <input type="text" id="loginID" /></div>
-        <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();" data-toggle="modal" data-target="#myModal">Login</button>
-    </div>
+    <div class="content">
+        <div id="overlay">
+            <div><input type="text" id="loginID" /></div>
+            <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();" data-toggle="modal" data-target="#myModal">Login</button>
+        </div>
 
+        <!-- This is the old sync button with alerts and prompts
     <button id="syncButton" onclick="connectID()" data-toggle="modal" data-target="#modalSync">Sync Account</button>
+    -->
+        <!-- Welcome Message for Login -->
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-
-
-    <!-- Welcome Message for Login -->
-    <div class="container">
-        <!-- Trigger the modal with a button -->
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <p id="WelcomeMessage"></p>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p id="WelcomeMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
 
 
-    <!-- Sync Account Messages -->
 
-    <div class="container">
-        <!-- Trigger the modal with a button -->
-        <!-- Modal -->
-        <div class="modal fade" id="modalSync" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
+        <div class="modal fade" id="modalSyncAccForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-body">
-                        <p id="SyncMessage"></p>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Sync Account</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <p>Would you like to sync your account? Sync your account once to begin saving your alarms.</p>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <p id="SyncMessage1"></p>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button onclick="syncIDModalAccept()">Yes</button>
+                        <button onclick="syncIDModalDeny()">Cancel</button>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+
+        <button onclick="" data-toggle="modal" data-target="#modalSyncAccForm">Sync Account</button>
 
 
 
-    <!-- Help box message -->
 
-    <div class="container">
-        <!-- Trigger the modal with a button -->
-        <!-- Modal -->
-        <div class="modal fade" id="modalHelp" role="dialog">
-            <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <p id="helpMessage"></p>
+
+        <!-- Sync Account Messages -->
+
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <!-- Modal -->
+            <div class="modal fade" id="modalSync" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p id="SyncMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
 
 
 
-    <div id="alarm_buttons">
-        <h2>Maintenance Alarms</h2>
-        <button onclick="addAlarm()" class="dropbtn">Add Alarm</button>
+        <!-- Help box message -->
 
-        <div id="myDropdown" class="dropdown-content">
-            <ul>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_1()">Lube Chain</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_2()">Professional Tune-Up</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_3()">Replace Brake Pads</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_4()">Replace Shifter</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_5()">Replace Brake Cable</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_6()">Replace Cable Housing</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_7()">Replace Tires</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_8()">Replace Chainring & Cassette</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_9()">Replace Chain</p></li>
-                <li><p id="maintenanceAlarm" onclick="generateRequest_10()">Replace Rear Derailleur Jockey Wheels</p></li>
-            </ul>
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <!-- Modal -->
+            <div class="modal fade" id="modalHelp" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p id="helpMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
+
+
+        <div id="alarm_buttons">
+            <h2>Maintenance Alarms</h2>
+            <button onclick="addAlarm()" class="dropbtn">Add Alarm</button>
+
+            <div id="myDropdown" class="dropdown-content">
+                <ul>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_1()">Lube Chain</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_2()">Professional Tune-Up</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_3()">Replace Brake Pads</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_4()">Replace Shifter</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_5()">Replace Brake Cable</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_6()">Replace Cable Housing</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_7()">Replace Tires</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_8()">Replace Chainring &amp; Cassette</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_9()">Replace Chain</p></li>
+                    <li><p id="maintenanceAlarm" onclick="generateRequest_10()">Replace Rear Derailleur Jockey Wheels</p></li>
+                </ul>
+            </div>
+
+            <!-- This is the old custom alarm with window alerts and prompts
         <button onclick="generateRequest()">Add Custom Alarm</button>
+        --->
+            <!--  <button onclick="sweetAlert()">Sweet Alert!</button> --->
+
+
+            <div class="modal fade" id="modalCustomMainForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Add Custom Alarm</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="text" id="maintenance" class="form-control validate">
+                                <label>Enter custom maitenance</label>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="text" id="customMiles" class="form-control validate">
+                                <label>Enter mileage for custom maintenance</label>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button onclick="customAlarm(); document.getElementById('maintenance').value = ''; document.getElementById('customMiles').value = '';">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="" data-toggle="modal" data-target="#modalCustomMainForm">Add Custom Alarm</button>
+
+            <div id="updateButtonModal"><button onclick="" data-toggle="modal" data-target="#modalUpdateMiles">Update Miles</button></div>
+
+            <!--
         <div id="update_button"><button onclick="updateMiles()">Update Miles</button></div>
+            -->
+
+
+
+            <div class="modal fade" id="modalUpdateMiles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Update Miles</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <label>Please enter how many miles you've ridden</label>
+                                <input type="text" id="updateMilesInput" class="form-control validate">
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <p id="updateMilesMessage"></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button onclick="updateMilesModal(); document.getElementById('updateMilesInput').value = '';">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- Old Save Alarm with window alert and prompts
         <button onclick="saveAlarm()">Save Alarm</button>
+            -->
 
-        <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
-    </div>
 
-    <table id="table" border="1">
-        <tr>
-            <th> Maintenance</th>
-            <th> Required miles before maintenance check </th>
-            <th> Miles ridden </th>
-            <th> </th>
-        </tr>
-    </table>
+            <div class="modal fade" id="modalSaveForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Save Alarms</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <p>Would you like to save your alarms? You can only save once per session.</p>
+                            </div>
 
-   
-    <button id="help_button" onclick="helpFunction();" data-toggle="modal" data-target="#modalHelp"></button>
- 
+                            <div class="md-form mb-5">
+                                <p id="saveMessage"></p>
+                            </div>
 
-    <!-- joey stopped here -->
-    <!-- danny started here-->
-    <div class="w3-light-grey w3-section">
-        <button onclick="myFunction('bikerInfo')" class="w3-button w3-block w3-left-align">
-            <h2>Biker Information</h2>
-        </button>
-        <div id="bikerInfo" class="w3-hide w3-container">
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button onclick="saveAlarmModalAccept()">Yes</button>
+                            <button onclick="savealarmModalDeny()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <table id="Biker_Info" border="1" style="width:50%">
+            <button onclick="" data-toggle="modal" data-target="#modalSaveForm">Save Alarm</button>
+
+
+
+
+            <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
+        </div>
+
+        <div class="table">
+            <table id="table" border="1">
                 <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td><b>Name</b></td>
-                    <td><b>Total Miles Ridden</b></td>
-                    <td><b>Average Speed (mph)</b></td>
-                    <td><b>Average Miles per Ride</b></td>
-                </tr>
-                <tr>
-                    <td id="name"></td>
-                    <td id="miles"></td>
-                    <td id="speed"></td>
-                    <td id="avgDistance"></td>
+                    <th> Maintenance</th>
+                    <th> Required miles before maintenance check </th>
+                    <th> Miles ridden </th>
+                    <th> </th>
                 </tr>
             </table>
         </div>
     </div>
 
-    <div class="w3-light-grey w3-section">
-        <button onclick="myFunction('videos')" class="w3-button w3-block w3-left-align">
-            <h2>Videos & Guides</h2>
-        </button>
-        <div id="videos" class="w3-hide w3-container">
+        <!--
+        <button id="help_button" onclick="helpFunction();" data-toggle="modal" data-target="#modalHelp"></button>
+        -->
+        <!-- joey stopped here -->
+        <!-- danny started here-->
+        <div class="w3-light-grey w3-section">
+            <button onclick="myFunction('bikerInfo')" class="w3-button w3-block w3-left-align">
+                <h2>Biker Information</h2>
+            </button>
+            <div id="bikerInfo" class="w3-hide w3-container">
 
-            <p>Below are videos and links to helpful tutorial videos depending on what bike issue you are encountering.</p>
-            <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for a video" title="Search for a video">
-            <div id="links">
-                <ul id="myUL">
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank">
-                            <img src="elliptigo_maintenance.png" width="400" height="250">
-                            <figcaption>Basic ElliptiGO Bike Maintenance</figcaption>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
-                            <img src="brakes.png" width="400" height="250">
-                            <figcaption>Adjusting the Breaks</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=_NA-dpzSRfY" target="_blank">
-                            <img src="3C_Hub.png" width="400" height="250">
-                            <figcaption>Adjusting the 3C Hub</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=ICIW5PhGAgI" target="_blank">
-                            <img src="remove_rear.png" width="400" height="250">
-                            <figcaption>Removing the Rear Wheel on the 3C</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=JjlukHhAwTo" target="_blank">
-                            <img src="install_rear.png" width="400" height="250">
-                            <figcaption>Installing the Rear Wheel on the 3C</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=orKUweCHhyY&feature=emb_title" target="_blank">
-                            <img src="adjust_chain.png" width="400" height="250">
-                            <figcaption>How to adjust the chain tension on an ElliptiGO ellitical bike</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=Sx4xubZRKTI" target="_blank">
-                            <img src="handle_bar.png" width="400" height="250">
-                            <figcaption>Adjusting Steering Height on the 3C</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=fozLT9AoXmY" target="_blank">
-                            <img src="front_wheel.png" width="400" height="250">
-                            <figcaption>Installing Front Wheel</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=owS8GIbeurI&feature=emb_title" target="_blank">
-                            <img src="removing_front_wheel.png" width="400" height="250">
-                            <figcaption>Removing Front Wheel</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=F-naPT6vYgo&feature=emb_title" target="_blank">
-                            <img src="tire_change.png" width="400" height="250">
-                            <figcaption>Changing a Tire</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=LKA1LoWvWb4" target="_blank">
-                            <img src="inflate.png" width="400" height="250">
-                            <figcaption>Inflate a Tire</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=8-KND18FQWI" target="_blank">
-                            <img src="cross_threading.png" width="400" height="250">
-                            <figcaption>Preventing Cross-Threading when Changing Stride Length</figcaption>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.youtube.com/watch?v=FJY9Qxm54LM&feature=emb_title" target="_blank">
-                            <img src="stride_length.png" width="400" height="250">
-                            <figcaption>Changing the Stride Length</figcaption>
-                        </a>
-                    </li>
-
-                </ul>
-
+                <table id="Biker_Info" border="1" style="width:50%" class="center">
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td><b>Name</b></td>
+                        <td><b>Total Miles Ridden</b></td>
+                        <td><b>Average Speed (mph)</b></td>
+                        <td><b>Average Miles per Ride</b></td>
+                    </tr>
+                    <tr>
+                        <td id="name"></td>
+                        <td id="miles"></td>
+                        <td id="speed"></td>
+                        <td id="avgDistance"></td>
+                    </tr>
+                </table>
             </div>
         </div>
-    </div>
-    <!-- /*danny ended here*/ -->
-    <!--alicia started here-->
-    <div class="w3-light-grey w3-section">
-        <button onclick="myFunction('settings')" class="w3-button w3-block w3-left-align">
-            <h2>Settings</h2>
-        </button>
-        <div id="settings" class="w3-hide w3-container">
 
+        <div class="w3-light-grey w3-section">
+            <button onclick="myFunction('videos')" class="w3-button w3-block w3-left-align">
+                <h2>Videos &amp; Guides</h2>
+            </button>
+            <div id="videos" class="w3-hide w3-container">
 
-            <div id="switch">
-                <p>Enable Dev-Mode to show manual updating of miles button.</p>
-                <label class="switch">
-                    <input type="checkbox" onchange="devMode()" />
-                    <span class="slider"></span>
-                </label><br>
+                <p>Below are videos and links to helpful tutorial videos depending on what bike issue you are encountering.</p>
+                <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for a video" title="Search for a video">
+                <div id="links">
+                    <ul id="myUL">
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=NKOc736MuA0" target="_blank">
+                                <img class="img-source" src="elliptigo_maintenance.png" width="400" height="250">
+                                <figcaption>Basic ElliptiGO Bike Maintenance</figcaption>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=xVARgsZIgYM&t=1s" target="_blank">
+                                <img class="img-source" src="brakes.png" width="400" height="250">
+                                <figcaption>Adjusting the Brakes</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=_NA-dpzSRfY" target="_blank">
+                                <img class="img-source" src="3C_Hub.png" width="400" height="250">
+                                <figcaption>Adjusting the 3C Hub</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=ICIW5PhGAgI" target="_blank">
+                                <img class="img-source" src="remove_rear.png" width="400" height="250">
+                                <figcaption>Removing the Rear Wheel on the 3C</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=JjlukHhAwTo" target="_blank">
+                                <img class="img-source" src="install_rear.png" width="400" height="250">
+                                <figcaption>Installing the Rear Wheel on the 3C</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=orKUweCHhyY&feature=emb_title" target="_blank">
+                                <img class="img-source" src="adjust_chain.png" width="400" height="250">
+                                <figcaption>How to adjust the chain tension on an ElliptiGO ellitical bike</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=Sx4xubZRKTI" target="_blank">
+                                <img class="img-source" src="handle_bar.png" width="400" height="250">
+                                <figcaption>Adjusting Steering Height on the 3C</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=fozLT9AoXmY" target="_blank">
+                                <img class="img-source" src="front_wheel.png" width="400" height="250">
+                                <figcaption>Installing Front Wheel</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=owS8GIbeurI&feature=emb_title" target="_blank">
+                                <img class="img-source" src="removing_front_wheel.png" width="400" height="250">
+                                <figcaption>Removing Front Wheel</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=F-naPT6vYgo&feature=emb_title" target="_blank">
+                                <img class="img-source" src="tire_change.png" width="400" height="250">
+                                <figcaption>Changing a Tire</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=LKA1LoWvWb4" target="_blank">
+                                <img class="img-source" src="inflate.png" width="400" height="250">
+                                <figcaption>Inflate a Tire</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=8-KND18FQWI" target="_blank">
+                                <img src="cross_threading.png" width="400" height="250">
+                                <figcaption>Preventing Cross-Threading when Changing Stride Length</figcaption>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.youtube.com/watch?v=FJY9Qxm54LM&feature=emb_title" target="_blank">
+                                <img class="img-source" src="stride_length.png" width="400" height="250">
+                                <figcaption>Changing the Stride Length</figcaption>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
             </div>
-
-
-            <div id="switch">
-                <p>Mute Notifications</p>
-                <label class="switch">
-                    <input type="checkbox" onchange="muteNotifications()">
-                    <span class="slider"></span>
-                </label><br>
-            </div>
-
-
-            <div id="checkbox">
-                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
-                <label for="myCheck">Allow automatic video play</label>
-            </div>
-
-            <div id="checkbox">
-                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
-                <label for="myCheck">Allow Text Message Reminders</label>
-            </div>
-
-            <div id="checkbox">
-                <input type="checkbox" id="myCheck" onclick="myFunction_setting()">
-                <label for="myCheck">Allow Email Reminders</label>
-            </div>
-
-            <div>
-                <form action="/action_page_binary.asp" method="post">
-                    <label for="fname">Notify me  </label>
-                    <input type="text" id="fname" name="fname" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
-                    <input type="submit" value="Update">
-                </form>
-            </div>
-
-            <br />
-            <button id="scroller"><a href="#top">Jump to top of page</a></button>
-
         </div>
-    </div>
+        <!-- /*danny ended here*/ -->
+        <!--alicia started here-->
+        <div class="w3-light-grey w3-section">
+            <button onclick="myFunction('settings')" class="w3-button w3-block w3-left-align">
+                <h2>Settings</h2>
+            </button>
+
+
+                <div id="settings" class="w3-hide w3-container">
+
+                    <div id="checkbox">
+                        <input type="checkbox" id="myCheck1" onclick="devMode()">
+                        <label for="myCheck1">Enable Dev-Mode to show manual updating of miles button.</label>
+                    </div>
+                    <div id="checkbox">
+                        <input type="checkbox" id="myCheck2" onclick="muteNotifications()">
+                        <label for="myCheck2">Mute Notifications</label>
+                    </div>
+                    <div id="checkbox">
+                        <input type="checkbox" id="myCheck3" onclick="myFunction_setting()">
+                        <label for="myCheck3">Allow automatic video play</label>
+                    </div>
+                    <div id="checkbox">
+                        <input type="checkbox" id="myCheck4" onclick="myFunction_setting()">
+                        <label for="myCheck4">Allow Email Reminders</label>
+                    </div>
+                    <div>
+                        <form action="/action_page_binary.asp" method="post">
+                            <label for="fname">Notify me  </label>
+                            <input type="text" id="fname" name="fname" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
+                            <input type="submit" value="Update">
+                        </form>
+                    </div>
+                    <br />
+                    <button id="scroller"><a href="#top">Jump to top of page</a></button>
+
+                </div>
+            </div>
 
 </body>
     </html>

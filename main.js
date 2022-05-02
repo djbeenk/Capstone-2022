@@ -9,6 +9,9 @@ let newDistance = 0;
 //If notifications is set to true, then enable notifications. This variable is used in the settings
 let notifications = true;
 
+
+
+/** 
 //Compares miles ridden with required miles before maintenance and outputs what needs maintenance. If the notification api does not work, it will just do a window alert instead
 function checkMiles_Alarm() {
     for (var i = 0; i < bikeArray.length; i++) {
@@ -28,6 +31,28 @@ function checkMiles_Alarm() {
         }
     }
 }
+**/
+
+function checkMiles_Alarm() {
+    for (var i = 0; i < bikeArray.length; i++) {
+        if (bikeArray[i][2] >= bikeArray[i][1]) {
+            if (notifications === true) {
+                Push.Permission.request();
+
+                if (Push.Permission.GRANTED) {
+                    Push.create("Maintenance time!", {
+                        body: bikeArray[i][0] + " needs maintenance!",
+                        timeout: 8000,
+                    });
+                }
+                else {
+                    window.alert(bikeArray[i][0] + " needs maintenance!");
+                }
+            }
+
+        }
+    }
+}
 
 
 //mutes notification toggle for settings. When enabled, it sets notifications to false and the user will no longer receive notifications 
@@ -43,11 +68,11 @@ function muteNotifications() {
 
 //This function is for the switch toggle in settings. When enabled, it shows the update miles button
 function devMode() {
-    if (update_button.style.display === "inline-block") {
-        update_button.style.display = "none";
+    if (updateButtonModal.style.display === "inline-block") {
+        updateButtonModal.style.display = "none";
     }
     else {
-        update_button.style.display = "inline-block";
+        updateButtonModal.style.display = "inline-block";
     }
 }
 
@@ -142,6 +167,21 @@ async function connectID() {
 
     }
 }
+
+async function syncIDModalAccept() {
+    connect = document.getElementById('loginID').value;
+    let myResponse2 = await fetch("capstone_php.php?createInfo=" + connect);
+    let result2 = await myResponse2.json();
+    //window.alert(result2);
+    syncSuccess = "Account synced. Please reload the page to begin saving your alarms.";
+    document.getElementById("SyncMessage1").innerHTML = syncSuccess;
+}
+
+function syncIDModalDeny() {
+    let syncFail = "Sync account cancelled.";
+    document.getElementById("SyncMessage1").innerHTML = syncFail;
+}
+
 //danny did this function
 //This function retrieves the current distance travelled from the big database.
 async function get_initialDistance() {
@@ -204,6 +244,23 @@ async function saveAlarm() {
     else {
         window.alert("Save alarms cancelled.");
     }
+}
+
+async function saveAlarmModalAccept() {
+    for (let i = 0; i < bikeArray.length; i++) {
+        bikeArray[i][3] = bikeArray[i][3].replace(/\'/g, "''");
+    }
+
+    loginID_1 = document.getElementById('loginID').value;
+    let myResponse3 = await fetch("capstone_php.php?login=" + loginID_1 + "&array=" + bikeArray);
+    let result3 = await myResponse3.json();
+
+    document.getElementById('saveMessage').innerHTML = result3;
+}
+
+async function savealarmModalDeny() {
+    saveCancel = "Save alarms cancelled.";
+    document.getElementById('saveMessage').innerHTML = saveCancel;
 }
 //joey did this next functions from here down
 //This function retrieves the bikearray from the capstone database file and then populates the table
@@ -278,6 +335,7 @@ window.onclick = function (event) {
 
 //This function gives the user prompts on what they would like for their custom maintenance alarm
 function generateRequest() {
+
     let user_Maintenance = prompt("Please enter custom maintenance: ",);
     let user_Miles = prompt("Please enter recommended miles before maintenance check: ",);
     if (user_Maintenance == null || user_Maintenance == "" || user_Miles == null || user_Miles == "") {
@@ -307,6 +365,57 @@ function generateRequest() {
         });
     }
 }
+
+function customAlarm() {
+    let user_Maintenance = document.getElementById('maintenance').value;
+    let user_Miles = document.getElementById('customMiles').value;
+    get_initialDistance().then(initialDistance => {
+
+        tempArray.push(user_Maintenance);
+        tempArray.push(user_Miles);
+        tempArray.push(milesToGo);
+        tempArray.push(deleteRowButton);
+        tempArray.push(initialDistance);
+        bikeArray.push(tempArray);
+        tempArray = [];
+
+        var numRows = table.rows.length;
+        for (var h = numRows - 1; h > 0; h--) {
+            table.deleteRow(h);
+        }
+        for (var i = 0; i < bikeArray.length; i++) {
+            var addRow = table.insertRow(table.length);
+            for (var j = 0; j < bikeArray[i].length - 1; j++) {
+                var cell = addRow.insertCell(j);
+                cell.innerHTML = bikeArray[i][j];
+            }
+        }
+    });
+}
+
+
+var sweetAlert_response;
+var sweetAlert_response2;
+
+
+/** 
+function sweetAlert(){
+    swal({
+        text: "Enter a custom maintenance: ",
+        content: "input",
+
+        button: {
+            text: "Submit",
+            closeModal: false,
+        },
+    }).then((response) => {
+        console.log(sweetAlert_response);
+        sweetAlert_response = response;
+        swal.close();
+    });
+}
+*/
+
 
 //This function is a predetermined maintenance alarm based off of the ElliptiGO manual.
 function generateRequest_1() {
@@ -615,6 +724,32 @@ function updateMiles() {
     }
     checkMiles_Alarm();
         console.log(bikeArray);
+}
+
+function updateMilesModal() {
+
+    let milesRidden = document.getElementById('updateMilesInput').value;
+    for (var i = 0; i < bikeArray.length; i++) {
+        bikeArray[i][2] += Number(milesRidden);
+    }
+
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length - 1; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+    checkMiles_Alarm();
+
+    updateMessage = "Miles updated.";
+    document.getElementById("updateMilesMessage").innerHTML = updateMessage;
+
+    console.log(bikeArray);
 }
 
 //This function begins when the user presses the delete button on the table. This will delete the maintenance from the array and delete it from the table
