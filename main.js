@@ -618,7 +618,7 @@ function generateRequest_7() {
 function generateRequest_8() {
     get_initialDistance().then(initialDistance => {
 
-        let maintenance = "Replace Chainring & Cassette";
+        let maintenance = "Replace Chainring and Cassette";
         let miles = 7200;
         tempArray.push(maintenance);
         tempArray.push(miles);
