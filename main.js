@@ -5,6 +5,7 @@ let deleteRowButton = "<html><button onclick='deleteRow(this)'>Delete</button></
 let milesToGo = 0;
 let initialDistance = 0;
 let newDistance = 0;
+let updatedMiles = 0;
 
 //If notifications is set to true, then enable notifications. This variable is used in the settings
 let notifications = true;
@@ -90,6 +91,11 @@ function checkMiles_Alarm1() {
 }
 
 
+//Function that updates miles in advance
+function updateMilesAdvance() {
+    updatedMiles = document.getElementById('milesAdvance').value;
+    updatedMiles = parseInt(updatedMiles);
+}
 
 
 //mutes notification toggle for settings. When enabled, it sets notifications to false and the user will no longer receive notifications 
