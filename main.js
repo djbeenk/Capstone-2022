@@ -9,12 +9,29 @@ let newDistance = 0;
 //If notifications is set to true, then enable notifications. This variable is used in the settings
 let notifications = true;
 
+function snooze(bike) {
+    for (var i = 0; i < bikeArray.length; i++) {
+        if (bikeArray[i][2] >= bikeArray[i][1]) {
+            bikeArray[i][1] = bike;
+        }
+    }
 
-
-/** 
+    var numRows = table.rows.length;
+    for (var h = numRows - 1; h > 0; h--) {
+        table.deleteRow(h);
+    }
+    for (var i = 0; i < bikeArray.length; i++) {
+        var addRow = table.insertRow(table.length);
+        for (var j = 0; j < bikeArray[i].length - 1; j++) {
+            var cell = addRow.insertCell(j);
+            cell.innerHTML = bikeArray[i][j];
+        }
+    }
+}       
 //Compares miles ridden with required miles before maintenance and outputs what needs maintenance. If the notification api does not work, it will just do a window alert instead
 function checkMiles_Alarm() {
     for (var i = 0; i < bikeArray.length; i++) {
+        
         if (bikeArray[i][2] >= bikeArray[i][1]) {
            // window.alert(bikeArray[i][0] + " needs maintenance!");
 
@@ -22,7 +39,20 @@ function checkMiles_Alarm() {
                 let permission = Notification.permission;
 
                 if (permission === 'granted') {
-                    new Notification(bikeArray[i][0] + " needs maintenance!");
+                    //new Notification(bikeArray[i][0] + " needs maintenance!");
+                    var message = new Notification(bikeArray[i][0] + " needs maintenance!", {
+                        body: "Click to snooze alarm.",
+                    });
+
+                    bike = bikeArray[i][1];
+
+
+                    message.onclick = function () {
+                        console.log("I was clicked");
+                        bike = bike+10;
+                        console.log(bike);
+                        snooze(bike)
+                    }
                 }
                 else {
                     window.alert(bikeArray[i][0] + " needs maintenance!");
@@ -31,9 +61,9 @@ function checkMiles_Alarm() {
         }
     }
 }
-**/
 
-function checkMiles_Alarm() {
+
+function checkMiles_Alarm1() {
     for (var i = 0; i < bikeArray.length; i++) {
         if (bikeArray[i][2] >= bikeArray[i][1]) {
             if (notifications === true) {
@@ -41,8 +71,13 @@ function checkMiles_Alarm() {
 
                 if (Push.Permission.GRANTED) {
                     Push.create("Maintenance time!", {
-                        body: bikeArray[i][0] + " needs maintenance!",
+                        body: bikeArray[i][0] + " needs maintenance! Click to snooze",
                         timeout: 8000,
+                        onclick: function () {
+                            console.log("clicked");
+                            window.focus();
+                            this.close();
+                        }
                     });
                 }
                 else {
@@ -53,6 +88,8 @@ function checkMiles_Alarm() {
         }
     }
 }
+
+
 
 
 //mutes notification toggle for settings. When enabled, it sets notifications to false and the user will no longer receive notifications 
@@ -369,6 +406,7 @@ function generateRequest() {
 function customAlarm() {
     let user_Maintenance = document.getElementById('maintenance').value;
     let user_Miles = document.getElementById('customMiles').value;
+    user_Miles = parseInt(user_Miles);
     get_initialDistance().then(initialDistance => {
 
         tempArray.push(user_Maintenance);
@@ -729,6 +767,7 @@ function updateMiles() {
 function updateMilesModal() {
 
     let milesRidden = document.getElementById('updateMilesInput').value;
+
     for (var i = 0; i < bikeArray.length; i++) {
         bikeArray[i][2] += Number(milesRidden);
     }
