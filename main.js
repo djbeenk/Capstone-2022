@@ -41,7 +41,7 @@ function checkMiles_Alarm() {
 
                 if (permission === 'granted') {
                     //new Notification(bikeArray[i][0] + " needs maintenance!");
-                    var message = new Notification(bikeArray[i][0] + " needs maintenance!", {
+                    var message = new Notification(bikeArray[i][0] + " needs maintenance soon!", {
                         body: "Click to snooze alarm.",
                     });
 

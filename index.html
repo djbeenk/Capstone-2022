@@ -87,22 +87,6 @@
                 position: relative;
             }
 
-        /* The switch - the box around the slider */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-            /* Hide default HTML checkbox */
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-
-
         #overlay {
             position: fixed;
             display: block;
@@ -201,6 +185,14 @@
             vertical-align: middle;
             align-items: center;
         }
+
+
+        input.custom {
+            width: 25px;
+            height: 25px;
+            accent-color: #84b444;
+        }
+
     </style>
     <!--alicia ended here-->
     <!--joey started here-->
@@ -645,34 +637,41 @@
             </button>
 
 
-                <div id="settings" class="w3-hide w3-container">
+            <div id="settings" class="w3-hide w3-container">
+                <br />
 
-                    <div id="checkbox">
-                        <input type="checkbox" id="myCheck1" onclick="devMode()">
-                        <label for="myCheck1">Enable Dev-Mode to show manual updating of miles button.</label>
-                    </div>
-                    <div id="checkbox">
-                        <input type="checkbox" id="myCheck2" onclick="muteNotifications()">
-                        <label for="myCheck2">Mute Notifications</label>
-                    </div>
-                    <div id="checkbox">
-                        <input type="checkbox" id="myCheck3" onclick="myFunction_setting()">
-                        <label for="myCheck3">Allow automatic video play</label>
-                    </div>
-                    <div id="checkbox">
-                        <input type="checkbox" id="myCheck4" onclick="myFunction_setting()">
-                        <label for="myCheck4">Allow Email Reminders</label>
-                    </div>
-                    <div>
-                        <label for="fname">Notify me  </label>
-                        <input type="text" id="milesAdvance" name="milesAdvance" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
-                        <button onclick="updateMilesAdvance()">Update</button>
+                <div id="checkbox">
+                      <input type="checkbox" class="custom" id="myCheck1" onclick="devMode()">
+                      <label for="myCheck1">Enable Dev-Mode to show manual updating of miles button.</label>
+                </div>
 
-                    </div>
-                    <br />
-                    <button id="scroller"><a href="#top">Jump to top of page</a></button>
+                <div id="checkbox">
+                    <input type="checkbox" class="custom" id="myCheck2" onclick="muteNotifications()">
+                    <label for="myCheck2">Mute Notifications</label>
+                </div>
+
+                <div id="checkbox">
+                    <input type="checkbox" class="custom" id="myCheck3" onclick="myFunction_setting()">
+                    <label for="myCheck3">Allow automatic video play</label>
+                </div>
+
+                <div id="checkbox">
+                    <input type="checkbox" class="custom" id="myCheck4" onclick="myFunction_setting()">
+                    <label for="myCheck4">Allow Email Reminders</label>
+                </div>
+
+
+
+                <div>
+                    <label for="fname">Notify me  </label>
+                    <input type="text" id="milesAdvance" name="milesAdvance" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
+                    <button onclick="updateMilesAdvance()">Update</button>
 
                 </div>
+                <br />
+                <button id="scroller"><a href="#top">Jump to top of page</a></button>
+
+            </div>
             </div>
 
 </body>
