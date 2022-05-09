@@ -11,10 +11,6 @@
 
     <script src="main.js"></script>
 
-
-
-
-
     <style>
         * {
             box-sizing: border-box;
@@ -34,10 +30,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
-
-
-
 
         .dropdown {
             position: relative;
@@ -160,7 +152,6 @@
             margin-top: 12px;
         }
 
-        /* Clear floats after the columns */
         #myUL:after {
             content: "";
             display: table;
@@ -192,6 +183,7 @@
             height: 25px;
             accent-color: #84b444;
         }
+
 
     </style>
     <!--alicia ended here-->
@@ -229,17 +221,10 @@
             <button id="loginButton" onclick="getID(); loadAlarm(); get_newDistance(); get_avgSpeed(); get_avgDistance();" data-toggle="modal" data-target="#myModal">Login</button>
         </div>
 
-        <!-- This is the old sync button with alerts and prompts
-    <button id="syncButton" onclick="connectID()" data-toggle="modal" data-target="#modalSync">Sync Account</button>
-    -->
-        <!-- Welcome Message for Login -->
+
         <div class="container">
-            <!-- Trigger the modal with a button -->
-            <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
-
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-body">
                             <p id="WelcomeMessage"></p>
@@ -248,13 +233,12 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
 
-
+        <!-- Modal Form that asks if user wants to sync account. -->
         <div class="modal fade" id="modalSyncAccForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -273,7 +257,6 @@
                         <div class="md-form mb-5">
                             <p id="SyncMessage1"></p>
                         </div>
-
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                         <button onclick="syncIDModalAccept()">Yes</button>
@@ -289,14 +272,9 @@
 
 
         <!-- Sync Account Messages -->
-
         <div class="container">
-            <!-- Trigger the modal with a button -->
-            <!-- Modal -->
             <div class="modal fade" id="modalSync" role="dialog">
                 <div class="modal-dialog">
-
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-body">
                             <p id="SyncMessage"></p>
@@ -305,7 +283,6 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -313,14 +290,9 @@
 
 
         <!-- Help box message -->
-
         <div class="container">
-            <!-- Trigger the modal with a button -->
-            <!-- Modal -->
             <div class="modal fade" id="modalHelp" role="dialog">
                 <div class="modal-dialog">
-
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-body">
                             <p id="helpMessage"></p>
@@ -329,11 +301,9 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
 
 
         <div id="alarm_buttons">
@@ -355,12 +325,7 @@
                 </ul>
             </div>
 
-            <!-- This is the old custom alarm with window alerts and prompts
-        <button onclick="generateRequest()">Add Custom Alarm</button>
-        --->
-            <!--  <button onclick="sweetAlert()">Sweet Alert!</button> --->
-
-
+            <!--Modal popup for Custom Maintenance alarms-->
             <div class="modal fade" id="modalCustomMainForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -397,11 +362,6 @@
 
             <div id="updateButtonModal"><button onclick="" data-toggle="modal" data-target="#modalUpdateMiles">Update Miles</button></div>
 
-            <!--
-        <div id="update_button"><button onclick="updateMiles()">Update Miles</button></div>
-            -->
-
-
 
             <div class="modal fade" id="modalUpdateMiles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
@@ -432,19 +392,7 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-            <!-- Old Save Alarm with window alert and prompts
-        <button onclick="saveAlarm()">Save Alarm</button>
-            -->
-
-
+            <!-- Modal Popup for saving alarms-->
             <div class="modal fade" id="modalSaveForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -472,15 +420,10 @@
                     </div>
                 </div>
             </div>
-
             <button onclick="" data-toggle="modal" data-target="#modalSaveForm">Save Alarm</button>
-
-
-
-
-            <!-- <button onclick="loadAlarm()">Load Alarm</button> -->
         </div>
 
+        <!--Table categories-->
         <div class="table">
             <table id="table" border="1">
                 <tr>
@@ -492,10 +435,6 @@
             </table>
         </div>
     </div>
-
-        <!--
-        <button id="help_button" onclick="helpFunction();" data-toggle="modal" data-target="#modalHelp"></button>
-        -->
         <!-- joey stopped here -->
         <!-- danny started here-->
         <div class="w3-light-grey w3-section">
@@ -660,20 +599,16 @@
                     <label for="myCheck4">Allow Email Reminders</label>
                 </div>
 
-
-
-                <div>
+                <div id="checkbox">
                     <label for="fname">Notify me  </label>
                     <input type="text" id="milesAdvance" name="milesAdvance" size="3"><span style="white-space: nowrap;">  miles in advance.</span> <br />
                     <button onclick="updateMilesAdvance()">Update</button>
-
                 </div>
                 <br />
                 <button id="scroller"><a href="#top">Jump to top of page</a></button>
 
             </div>
-            </div>
-
+        </div>
 </body>
     </html>
 <!-- alicia ended here --> 

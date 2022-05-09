@@ -10,6 +10,8 @@ let updatedMiles = 0;
 //If notifications is set to true, then enable notifications. This variable is used in the settings
 let notifications = true;
 
+//Joey started here
+//Snooze alarm, when user clicks on the snooze button, add 10 miles into the bikearray then repopulate the table
 function snooze(bike) {
     for (var i = 0; i < bikeArray.length; i++) {
         if (bikeArray[i][2] >= bikeArray[i][1]) {
@@ -34,20 +36,13 @@ function checkMiles_Alarm() {
     for (var i = 0; i < bikeArray.length; i++) {
         
         if (bikeArray[i][2] >= bikeArray[i][1]) {
-           // window.alert(bikeArray[i][0] + " needs maintenance!");
-
             if (notifications === true) {
                 let permission = Notification.permission;
-
                 if (permission === 'granted') {
-                    //new Notification(bikeArray[i][0] + " needs maintenance!");
                     var message = new Notification(bikeArray[i][0] + " needs maintenance soon!", {
                         body: "Click to snooze alarm.",
                     });
-
                     bike = bikeArray[i][1];
-
-
                     message.onclick = function () {
                         console.log("I was clicked");
                         bike = bike+10;
@@ -62,34 +57,6 @@ function checkMiles_Alarm() {
         }
     }
 }
-
-
-function checkMiles_Alarm1() {
-    for (var i = 0; i < bikeArray.length; i++) {
-        if (bikeArray[i][2] >= bikeArray[i][1]) {
-            if (notifications === true) {
-                Push.Permission.request();
-
-                if (Push.Permission.GRANTED) {
-                    Push.create("Maintenance time!", {
-                        body: bikeArray[i][0] + " needs maintenance! Click to snooze",
-                        timeout: 8000,
-                        onclick: function () {
-                            console.log("clicked");
-                            window.focus();
-                            this.close();
-                        }
-                    });
-                }
-                else {
-                    window.alert(bikeArray[i][0] + " needs maintenance!");
-                }
-            }
-
-        }
-    }
-}
-
 
 //Function that updates miles in advance
 function updateMilesAdvance() {
@@ -128,12 +95,10 @@ function searchFunction() {
     var a;
     var i;
     var searchText;
-
     input = document.getElementById("myInput");
     search = input.value.toUpperCase();
     ul = document.getElementById("myUL");
     list = ul.getElementsByTagName("li");
-
     for (i = 0; i < list.length; i++)
     {
         a = list[i].getElementsByTagName("a")[0];
@@ -142,12 +107,12 @@ function searchFunction() {
         if (searchText.toUpperCase().indexOf(search) > -1) {
             list[i].style.display = "";
         }
-
         else {
             list[i].style.display = "none";
         }
     }
 }
+//Joey ended here
 //The myFunction syntax is credited to W3 Schools
 function myFunction(id) {
     var x = document.getElementById(id);
@@ -183,7 +148,6 @@ async function getID() {
     }
     else {
         document.getElementById("overlay").style.display = "none";
-
         //window.alert("Hello, " + result1);
         let welcomeMessage = ("Hello, " + result1 + "!");
         document.getElementById("WelcomeMessage").innerHTML = welcomeMessage;
@@ -333,16 +297,7 @@ async function loadAlarm() {
         bikeArray[i][4] = +(bikeArray[i][4]);
     }
 
-    //Check the new distance obtained during login and add the difference to the bikearray. 
-    /**
-    newDistance = sessionStorage.getItem(loginID);
-    for (var i = 0; i < bikeArray.length; i++) {
-        if (newDistance > bikeArray[i][4]) {
-            milesToGo = newDistance - bikeArray[i][4];
-            bikeArray[i][2] = milesToGo;
-        }
-    }
-    */
+
       
     for (var i = 0; i < bikeArray.length; i++) {
         var addRow = table.insertRow(table.length);
@@ -361,7 +316,7 @@ function addAlarm() {
 }
 
 
-/** The following code is taken from W3 Schools. It hides and shows the contents of the dropdown menu. */
+/** The following code is taken from and credited to W3 Schools. It hides and shows the contents of the dropdown menu. */
 window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -436,29 +391,6 @@ function customAlarm() {
         }
     });
 }
-
-
-var sweetAlert_response;
-var sweetAlert_response2;
-
-
-/** 
-function sweetAlert(){
-    swal({
-        text: "Enter a custom maintenance: ",
-        content: "input",
-
-        button: {
-            text: "Submit",
-            closeModal: false,
-        },
-    }).then((response) => {
-        console.log(sweetAlert_response);
-        sweetAlert_response = response;
-        swal.close();
-    });
-}
-*/
 
 
 //This function is a predetermined maintenance alarm based off of the ElliptiGO manual.
@@ -741,10 +673,9 @@ function generateRequest_10() {
     });
 }
 
+//A help function if the user encounters errors. 
 function helpFunction() {
     document.getElementById("helpMessage").innerHTML = "If you are getting the Alarms not found - undefined error or your alarms are not saving, reload the page, add your alarms, press the save alarm button, then reload again.";
-
-   // window.alert("If you are getting the Alarms not found - undefined error or your alarms are not saving, reload the page, add your alarms, press the save alarm button, then reload again.");
 }
 //This function is used to manually update the milestogo to show how the alarms work and for testing purposes.
 function updateMiles() {
